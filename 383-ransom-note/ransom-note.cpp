@@ -4,26 +4,16 @@ public:
 
         int n = ransomNote.size();
         int m = magazine.size();
-
-        sort(ransomNote.begin(), ransomNote.end());
-        sort(magazine.begin(), magazine.end());
-
-        for(int i = 0; i < n; i++) {
-
-            int j;
-
-            for(j = 0; j < m; j++) {
-
-                if(ransomNote[i] == magazine[j]) {
-                    magazine[j] = '#';
-                    break;
-                }
-            }
-
-            if(j == m)
-                return false;
+        int freq[26]={0};
+        for(int i = 0;i<m;i++){
+            freq[magazine[i]-'a']++;
         }
-
-        return true;
+        for(int j=0;j<n;j++){
+           freq[ransomNote[j] - 'a']--;
+        
+        if(freq[ransomNote[j]-'a']< 0)
+       return false;
+    }
+    return true;
     }
 };
