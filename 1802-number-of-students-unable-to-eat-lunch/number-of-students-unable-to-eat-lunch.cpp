@@ -10,7 +10,7 @@ public:
         }
         //if queue == sandwiches pop both
         int i =0;
-        while(q.size()>0 && count!=q.size()){
+        while(q.size()>0 && count!=q.size()){ // isme q ka size =0 ho gya to break ho jyga and count ka value kbhi size of kyu ho gya to break kr dege
             if(q.front()==sandwiches[i]){
                
                 count=0;
@@ -23,6 +23,6 @@ public:
                 count++;
             }
         }
-        return q.size();
+        return count;
     }
 };
