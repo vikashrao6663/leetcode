@@ -1,31 +1,28 @@
 class Solution {
 public:
-set<vector<int>>s;
-void getallcombine(vector<int>&arr,int idx,int tar,vector<vector<int>>&ans,vector<int>&combine){
-if(idx == arr.size() || tar<0){
-    return ;
-} 
-if(tar ==0){
-    if(s.find(combine)==s.end()){
-        ans.push_back(combine);
-        s.insert(combine);
-    }
-    return;
-}
-combine.push_back(arr[idx]);
-//single
- getallcombine(arr,idx+1,tar-arr[idx],ans,combine);
- //multiple
- getallcombine(arr,idx,tar-arr[idx],ans,combine);
- combine.pop_back();
- // exclusion
-  getallcombine(arr,idx+1,tar,ans,combine);
-}
 
+    void getallcombine(vector<int>& arr, int idx, int tar,
+                       vector<vector<int>>& ans, vector<int>& combine) {
+
+        if(tar == 0) {
+            ans.push_back(combine);
+            return;
+        }
+        if(idx == arr.size() || tar < 0) {
+            return;
+        }
+        combine.push_back(arr[idx]);
+        // multiple times current element le sakte hain
+        getallcombine(arr, idx, tar - arr[idx], ans, combine);
+        combine.pop_back();
+        // current element ko skip karo
+        getallcombine(arr, idx + 1, tar, ans, combine);
+    }
     vector<vector<int>> combinationSum(vector<int>& arr, int target) {
-    vector<vector<int>>ans;
-    vector<int>combine;
-    getallcombine(arr,0,target,ans,combine);
-    return ans;
+        vector<vector<int>> ans;
+        vector<int> combine;
+        getallcombine(arr, 0, target, ans, combine);
+
+        return ans;
     }
 };
