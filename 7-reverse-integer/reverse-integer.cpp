@@ -6,7 +6,8 @@ public:
 while (x != 0) {
 
     int digit = x % 10;      // Last digit nikalo
-
+    if(rev > INT_MAX || rev < INT_MIN)
+            return 0;
     rev = rev * 10 + digit;  // Reverse me add karo
 
     x = x / 10;              // Last digit hata do
@@ -14,7 +15,7 @@ while (x != 0) {
 
 if(rev > INT_MAX || rev < INT_MIN)
             return 0;
-            
+
 return rev;
     }
 };
