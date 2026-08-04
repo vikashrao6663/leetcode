@@ -1,36 +1,23 @@
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        // sort all the element given 
+      sort(intervals.begin(),intervals.end());
+      //ans store krge
+      vector<vector<int>> ans;
+      //first element ko ans mai push kr do 
+      ans.push_back(intervals[0]); 
+      //ek for loog chla kr 0 ko chod kr 1 se n tk traverse krge  
+      for(int i =1;i<intervals.size();i++){
+        //agr 1 element ke 2 point wala uske baad wale se bda ho to first wale ka first lege or 2nd wale ka last wala 
+        if(intervals[i][0]<=ans.back()[1]){
 
-        sort(intervals.begin(), intervals.end());
-
-        vector<vector<int>> ans;
-        int n = intervals.size();
-
-        vector<bool> vis(n, false);
-
-        for(int i = 0; i < n; i++) {
-
-            if(vis[i]) continue;
-
-            int start = intervals[i][0];
-            int end = intervals[i][1];
-
-            for(int j = i + 1; j < n; j++) {
-
-                if(intervals[j][0] <= end) {
-
-                    end = max(end, intervals[j][1]);
-                    vis[j] = true;
-
-                } else {
-                    break;
-                }
-            }
-
-            ans.push_back({start, end});
+            ans.back()[1]=max(ans.back()[1],intervals[i][1]);
         }
-
-        return ans;
+        else {
+            ans.push_back(intervals[i]);
+        }
+      }
+      return ans;
     }
 };
